@@ -2,6 +2,5 @@
 
 # Starts Firefox3 when it is installed in Applications/Firefox3 (to coexist with Firefox 2 in Applications/Firefox). Use this instead of calling the AppleScripts directly.
 
-#osascript bin/mac/stop-firefox.scpt
-open -a Firefox3 $*
-
+osascript -e 'tell application "FireFox3" to quit without saving'
+osascript -e "tell application \"FireFox3\" to open location \"$1\""

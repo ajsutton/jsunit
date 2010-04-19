@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# Stops Opera9. Use this instead of calling the AppleScripts directly.
+# Stops Opera9.
 
-osascript bin/mac/stop-opera9.scpt
-
+osascript -e 'tell application "Opera" to quit without saving'

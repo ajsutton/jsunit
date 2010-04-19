@@ -1,2 +1,3 @@
 #!/bin/sh
-killall -9 "Google Chrome"
+
+osascript -e 'tell application "Google Chrome" to quit without saving'

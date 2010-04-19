@@ -1,7 +1,6 @@
 #!/bin/sh
 
-# Starts Safari. Use this instead of calling the AppleScripts directly.
+# Starts Safari.
 
-osascript bin/mac/stop-safari.scpt
-#osascript bin/mac/start-safari.scpt $1
-open -a Safari $*
+osascript -e 'tell application "Safari" to quit without saving'
+osascript -e "tell application \"Safari\" to open location \"$1\""

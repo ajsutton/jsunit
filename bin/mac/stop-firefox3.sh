@@ -1,2 +1,3 @@
 #!/bin/sh
-killall -9 firefox-bin
+
+osascript -e 'tell application "FireFox3" to quit without saving'

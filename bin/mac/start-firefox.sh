@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Starts Firefox. Use this instead of calling the AppleScripts directly.
+# Starts Firefox.
 
-osascript bin/mac/stop-firefox.scpt
-osascript bin/mac/start-firefox.scpt $1
+osascript -e 'tell application "FireFox" to quit without saving'
+osascript -e "tell application \"FireFox\" to open location \"$1\""
 

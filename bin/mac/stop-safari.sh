@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# Stops Safari. Use this instead of calling the AppleScripts directly.
+# Stops Safari.
 
-osascript bin/mac/stop-safari.scpt
-
+osascript -e 'tell application "Safari" to quit without saving'
