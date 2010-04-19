@@ -134,7 +134,7 @@
     </target>
 
     <target name="standalone_test" description="Runs tests on the local machine">
-        <junit showoutput="true" haltonerror="true" haltonfailure="true">
+        <junit showoutput="true" haltonerror="false" haltonfailure="false" errorproperty="tests.failed" failureproperty="tests.failed">
             <formatter type="plain" usefile="false"/>
             <classpath refid="classpath"/>
             <sysproperty key="java.util.logging.config.file" value="${loggingPropertiesFile}"/>
@@ -148,10 +148,11 @@
             <sysproperty key="url" value="${url}"/>
             <test name="net.jsunit.StandaloneTest"/>
         </junit>
+        <fail if="tests.failed" message="There were test failures." />
     </target>
 
     <target name="selenium_test" description="Run tests through Selenium">
-        <junit showoutput="true" haltonerror="true" haltonfailure="true">
+        <junit showoutput="true" haltonerror="false" haltonfailure="false" errorproperty="tests.failed" failureproperty="tests.failed">
             <formatter type="plain" usefile="false"/>
             <classpath refid="classpath"/>
             <sysproperty key="seleniumConfigFilePath" value="${seleniumConfigFilePath}"/>
@@ -160,11 +161,12 @@
             <sysproperty key="description" value="${description}"/>
             <sysproperty key="logsDirectory" value="${logsDirectory}"/>
             <test name="net.jsunit.SeleniumTest"/>
+        <fail if="tests.failed" message="There were test failures." />
         </junit>
     </target>
 
     <target name="distributed_test" description="Runs tests on the remote machines">
-        <junit showoutput="true" haltonerror="true" haltonfailure="true">
+        <junit showoutput="true" haltonerror="false" haltonfailure="false" errorproperty="tests.failed" failureproperty="tests.failed">
             <formatter type="plain" usefile="false"/>
             <classpath refid="classpath"/>
             <sysproperty key="java.util.logging.config.file" value="${loggingPropertiesFile}"/>
@@ -178,6 +180,7 @@
             <sysproperty key="url" value="${url}"/>
             <test name="net.jsunit.DistributedTest"/>
         </junit>
+        <fail if="tests.failed" message="There were test failures." />
     </target>
 
 </project>
