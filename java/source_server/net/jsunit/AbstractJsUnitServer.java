@@ -1,21 +1,22 @@
 package net.jsunit;
 
-import com.opensymphony.webwork.dispatcher.ServletDispatcher;
-import com.opensymphony.xwork.config.ConfigurationManager;
-import com.opensymphony.xwork.config.ConfigurationProvider;
-import net.jsunit.configuration.ServerConfiguration;
-import net.jsunit.configuration.ServerType;
-import net.jsunit.utility.XmlUtility;
-import org.jdom.Element;
-import org.mortbay.http.SocketListener;
-import org.mortbay.http.handler.ResourceHandler;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.servlet.ServletHttpContext;
-import org.mortbay.start.Monitor;
-import org.mortbay.util.FileResource;
+import java.io.*;
+import java.util.*;
+import java.util.logging.*;
 
-import java.util.List;
-import java.util.logging.Logger;
+import net.jsunit.configuration.*;
+import net.jsunit.utility.*;
+
+import org.jdom.*;
+import org.mortbay.http.*;
+import org.mortbay.http.handler.*;
+import org.mortbay.jetty.*;
+import org.mortbay.jetty.servlet.*;
+import org.mortbay.start.*;
+import org.mortbay.util.*;
+
+import com.opensymphony.webwork.dispatcher.*;
+import com.opensymphony.xwork.config.*;
 
 public abstract class AbstractJsUnitServer {
 
@@ -88,7 +89,14 @@ public abstract class AbstractJsUnitServer {
         ServletHttpContext jsunitContext = new ServletHttpContext();
         jsunitContext.setContextPath("jsunit");
         jsunitContext.setResourceBase(resourceBase());
-        ResourceHandler resourceHandler = new ResourceHandler();
+        ResourceHandler resourceHandler = new ResourceHandler() {
+        	@Override
+        	public void handleGet(HttpRequest request, HttpResponse response,
+        			String arg2, String arg3, Resource arg4) throws IOException {
+        		response.setField("Pragma", "no-cache");
+        		super.handleGet(request, response, arg2, arg3, arg4);
+        	}
+        };
         resourceHandler.setDirAllowed(false);
         jsunitContext.addHandler(resourceHandler);
         for (String servletName : servletNames())
